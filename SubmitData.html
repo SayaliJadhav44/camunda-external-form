@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Camunda Task Form</title>
+  <script src="https://unpkg.com/@camunda/form-sdk-js@latest/dist/form.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      max-width: 500px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Camunda Task Form</h2>
+  <form id="my-form">
+    <label for="comment">Comment:</label><br>
+    <textarea id="comment" name="comment" rows="4" required></textarea><br>
+    <button type="submit">Complete Task</button>
+  </form>
+
+  <script>
+    const form = new CamundaForm({
+      form: document.querySelector('#my-form'),
+      container: document.body
+    });
+
+    form.on('submit', async (event) => {
+      event.preventDefault();
+      const comment = document.getElementById('comment').value;
+      await form.submit({ comment });
+    });
+  </script>
+</body>
+</html>
